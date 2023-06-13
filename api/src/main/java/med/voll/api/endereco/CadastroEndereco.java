@@ -1,6 +1,6 @@
 package med.voll.api.endereco;
 
-public class DadosEndereco {
+public class CadastroEndereco {
     private String logradouro;
     private String bairro;
     private String cep;
@@ -9,10 +9,11 @@ public class DadosEndereco {
     private String numero;
     private String complemento;
     
-    DadosEndereco(String logradouro, String bairro , String cep, String cidade, String uf, String numero, String complemento){
+    CadastroEndereco(String logradouro, String bairro , String cep, String cidade, String uf, String numero, String complemento){
         this.logradouro = logradouro;
         this.bairro = bairro;
         this.cidade = cidade;
+        this.cep = cep;
         this.uf = uf;
         this.numero = numero;
         this.complemento = complemento;
@@ -40,7 +41,7 @@ public class DadosEndereco {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        DadosEndereco other = (DadosEndereco) obj;
+        CadastroEndereco other = (CadastroEndereco) obj;
         if (logradouro == null) {
             if (other.logradouro != null)
                 return false;

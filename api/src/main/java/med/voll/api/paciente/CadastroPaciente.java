@@ -1,52 +1,30 @@
-package med.voll.api.medico;
+package med.voll.api.paciente;
 
 import med.voll.api.endereco.CadastroEndereco;
 
-public class CadastroMedico {
-    private String nome ;
-    private String email ;
-    private String crm ;
-    private Especialidade especialidade ;
+public class CadastroPaciente {
+    private String nome;
+    private String CPF;
+    private String email;
+    private String telefone;
     private CadastroEndereco endereco;
-    
-    CadastroMedico(String nome, String email ,String crm, Especialidade especialidade , CadastroEndereco endereco ){
+
+    CadastroPaciente(String nome, String CPF , String email, String telefone , CadastroEndereco endereco){
         this.nome = nome;
+        this.CPF = CPF;
         this.email = email;
-        this.crm = crm ;
-        this.especialidade = especialidade;
+        this.telefone = telefone;
         this.endereco = endereco;
     }
 
-    public String getNome() {
-        return nome;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getCrm() {
-        return crm;
-    }
-
-    public Especialidade getEspecialidade() {
-        return especialidade;
-    }
-
-    public CadastroEndereco getEndereco() {
-        return endereco;
-    }
-
-
-    
     @Override
     public int hashCode() {
         final int prime = 31;
         int result = 1;
         result = prime * result + ((nome == null) ? 0 : nome.hashCode());
+        result = prime * result + ((CPF == null) ? 0 : CPF.hashCode());
         result = prime * result + ((email == null) ? 0 : email.hashCode());
-        result = prime * result + ((crm == null) ? 0 : crm.hashCode());
-        result = prime * result + ((especialidade == null) ? 0 : especialidade.hashCode());
+        result = prime * result + ((telefone == null) ? 0 : telefone.hashCode());
         result = prime * result + ((endereco == null) ? 0 : endereco.hashCode());
         return result;
     }
@@ -59,23 +37,26 @@ public class CadastroMedico {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        CadastroMedico other = (CadastroMedico) obj;
+        CadastroPaciente other = (CadastroPaciente) obj;
         if (nome == null) {
             if (other.nome != null)
                 return false;
         } else if (!nome.equals(other.nome))
+            return false;
+        if (CPF == null) {
+            if (other.CPF != null)
+                return false;
+        } else if (!CPF.equals(other.CPF))
             return false;
         if (email == null) {
             if (other.email != null)
                 return false;
         } else if (!email.equals(other.email))
             return false;
-        if (crm == null) {
-            if (other.crm != null)
+        if (telefone == null) {
+            if (other.telefone != null)
                 return false;
-        } else if (!crm.equals(other.crm))
-            return false;
-        if (especialidade != other.especialidade)
+        } else if (!telefone.equals(other.telefone))
             return false;
         if (endereco == null) {
             if (other.endereco != null)
@@ -87,9 +68,27 @@ public class CadastroMedico {
 
     @Override
     public String toString() {
-        return "CadastroMedico [nome=" + nome + ", email=" + email + ", crm=" + crm + ", especialidade=" + especialidade
+        return "CadastroPaciente [nome=" + nome + ", CPF=" + CPF + ", email=" + email + ", telefone=" + telefone
                 + ", endereco=" + endereco + "]";
     }
 
+    public String getNome() {
+        return nome;
+    }
 
+    public String getCPF() {
+        return CPF;
+    }
+
+    public String getEmail() {
+        return email;
+    }
+
+    public String getTelefone() {
+        return telefone;
+    }
+
+    public CadastroEndereco getEndereco() {
+        return endereco;
+    }
 }
