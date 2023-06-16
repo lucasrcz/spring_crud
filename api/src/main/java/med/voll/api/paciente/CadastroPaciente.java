@@ -1,12 +1,22 @@
 package med.voll.api.paciente;
 
+import jakarta.validation.Valid;
+import jakarta.validation.constraints.Email;
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.NotNull;
 import med.voll.api.endereco.CadastroEndereco;
 
 public class CadastroPaciente {
+    @NotBlank
     private String nome;
+    @NotBlank
     private String CPF;
+    @NotBlank
+    @Email
     private String email;
+    @NotBlank
     private String telefone;
+    @NotNull @Valid
     private CadastroEndereco endereco;
 
     CadastroPaciente(String nome, String CPF , String email, String telefone , CadastroEndereco endereco){

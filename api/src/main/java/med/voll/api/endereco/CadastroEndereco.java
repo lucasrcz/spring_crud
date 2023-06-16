@@ -1,15 +1,24 @@
 package med.voll.api.endereco;
 
+import jakarta.validation.constraints.NotBlank;
+import jakarta.validation.constraints.Pattern;
+
 public class CadastroEndereco {
-    private String logradouro;
-    private String bairro;
-    private String cep;
-    private String cidade;
-    private String uf;
-    private String numero;
-    private String complemento;
+    @NotBlank
+     String logradouro;
+    @NotBlank
+     String bairro;
+    @NotBlank
+    @Pattern(regexp = "\\d{8}")
+     String cep;
+    @NotBlank
+     String cidade;
+    @NotBlank
+     String uf;
+     String numero;
+     String complemento;
     
-    CadastroEndereco(String logradouro, String bairro , String cep, String cidade, String uf, String numero, String complemento){
+    public CadastroEndereco(String logradouro, String bairro , String cep, String cidade, String uf, String numero, String complemento){
         this.logradouro = logradouro;
         this.bairro = bairro;
         this.cidade = cidade;
@@ -18,6 +27,8 @@ public class CadastroEndereco {
         this.numero = numero;
         this.complemento = complemento;
     }
+
+
 
     @Override
     public int hashCode() {
