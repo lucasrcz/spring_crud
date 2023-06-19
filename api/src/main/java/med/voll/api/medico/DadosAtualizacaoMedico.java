@@ -5,7 +5,8 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import med.voll.api.endereco.CadastroEndereco;
-
+@Getter
+@Setter
 @EqualsAndHashCode
 public class DadosAtualizacaoMedico{
     @NotNull
@@ -21,25 +22,5 @@ public class DadosAtualizacaoMedico{
         this.telefone = telefone;
         this.email = email;
         this.endereco = endereco;
-    }
-
-    public Long getId(Long id) {
-        return this.id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public String getTelefone() {
-        return telefone;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public CadastroEndereco getEndereco() {
-        return endereco;
     }
 }
