@@ -13,7 +13,6 @@ import org.springframework.web.bind.annotation.*;
 
 import med.voll.api.medico.CadastroMedico;
 
-import java.util.List;
 
 @RestController
 @RequestMapping("medicos")
@@ -29,7 +28,7 @@ public class MedicoController {
     }
     @GetMapping
     public Page<DadosListagemMedicos> listar(@PageableDefault(size = 15, sort = {"nome"}) Pageable paginacao){
-        return repository.findAll(paginacao).map(DadosListagemMedicos::new);
+        return repository.findAllByAtivoTrue(paginacao).map(DadosListagemMedicos::new);
     }
 
     @PutMapping
@@ -37,6 +36,16 @@ public class MedicoController {
     public void atualizar(@RequestBody @Valid DadosAtualizacaoMedico dados){
         Medico medico = repository.getReferenceById(dados.getId());
         medico.AtualizarInformacoes(dados);
-
     }
+
+    
+    @DeleteMapping("/{id}")
+    @Transactional  //Exclusão lógica
+    public void desativar(@PathVariable Long id){
+        Medico medico = repository.getReferenceById(id);
+        medico.desativar();
+    }
+    //Exclusão física (os dados são apagados do database)
+    //public void excluir(@PathVariable Long id){
+        //repository.deleteById(id);
 }

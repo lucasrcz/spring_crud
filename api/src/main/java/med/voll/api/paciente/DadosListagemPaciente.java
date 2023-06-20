@@ -4,7 +4,6 @@ import lombok.EqualsAndHashCode;
 import lombok.Getter;
 import lombok.Setter;
 import med.voll.api.controller.Paciente;
-import med.voll.api.medico.DadosListagemMedicos;
 @Getter
 @Setter
 @EqualsAndHashCode

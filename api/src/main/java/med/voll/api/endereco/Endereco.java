@@ -11,6 +11,7 @@ import lombok.NoArgsConstructor;
 @Getter
 @NoArgsConstructor
 @AllArgsConstructor
+@EqualsAndHashCode
 public class Endereco {
     private String logradouro;
     private String bairro;
@@ -28,6 +29,31 @@ public class Endereco {
         this.cidade = dados.getCidade();
         this.numero = dados.getNumero();
         this.complemento = dados.getComplemento();
+
+    }
+
+    public void AtualizarInformacoes(CadastroEndereco endereco) {
+        if(endereco.getLogradouro() != null){
+            this.logradouro = endereco.getLogradouro();
+        }
+        if(endereco.bairro != null){
+            this.bairro = endereco.getBairro();
+        }
+        if(endereco.getCep() != null){
+            this.cep = endereco.getCep();
+        }
+        if(endereco.getNumero() != null){
+            this.numero = endereco.getNumero();
+        }
+        if(endereco.getComplemento() != null){
+            this.complemento = endereco.getComplemento();
+        }
+        if(endereco.getCidade() != null){
+            this.cidade = endereco.getCidade();
+        }
+        if(endereco.getUf() != null){
+            this.uf = endereco.getUf();
+        }
 
     }
 }
