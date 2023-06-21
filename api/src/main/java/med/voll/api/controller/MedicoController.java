@@ -9,6 +9,9 @@ import org.springframework.data.web.PageableDefault;
 import org.springframework.http.ResponseEntity;
 import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.util.UriComponentsBuilder;
+
+import java.net.URI;
 
 
 @RestController
@@ -20,8 +23,12 @@ public class MedicoController {
     
     @PostMapping
     @Transactional
-    public void cadastrar(@RequestBody @Valid CadastroMedico dados){
-        repository.save(new Medico(dados)) ;//Transforma o DTO em Repository
+    public ResponseEntity cadastrar(@RequestBody @Valid CadastroMedico dados, UriComponentsBuilder uriBuilder){
+        Medico medico = new Medico(dados);
+        repository.save(medico) ;//Transforma o DTO em Repository
+        URI uri = uriBuilder.path("/medicos/{id}").buildAndExpand(medico.getId()).toUri();
+
+        return ResponseEntity.created(uri).body(new DadosDetalhamentoMedico(medico));
     }
     @GetMapping
     public ResponseEntity<Page<DadosListagemMedicos>> listar(@PageableDefault(size = 15, sort = {"nome"}) Pageable paginacao){
