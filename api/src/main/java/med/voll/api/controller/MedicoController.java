@@ -26,13 +26,13 @@ public class MedicoController {
     public ResponseEntity cadastrar(@RequestBody @Valid CadastroMedico dados, UriComponentsBuilder uriBuilder){
         Medico medico = new Medico(dados);
         repository.save(medico) ;//Transforma o DTO em Repository
-        URI uri = uriBuilder.path("/medicos/{id}").buildAndExpand(medico.getId()).toUri();
+        URI uri = uriBuilder.path("/medicos/{id}").buildAndExpand(medico.getId()).toUri(); // Gera caminho uri
 
-        return ResponseEntity.created(uri).body(new DadosDetalhamentoMedico(medico));
+        return ResponseEntity.created(uri).body(new DadosDetalhamentoMedico(medico)); //Retorna código 201 e retorna DTO de detalhes da criação
     }
     @GetMapping
     public ResponseEntity<Page<DadosListagemMedicos>> listar(@PageableDefault(size = 15, sort = {"nome"}) Pageable paginacao){
-        Page<DadosListagemMedicos> page = repository.findAllByAtivoTrue(paginacao).map(DadosListagemMedicos::new);
+        Page<DadosListagemMedicos> page = repository.findAllByAtivoTrue(paginacao).map(DadosListagemMedicos::new); //ResponseEntity recebe objetos de páginas
         return ResponseEntity.ok(page);
     }
 
@@ -57,4 +57,14 @@ public class MedicoController {
     //Exclusão física (os dados são apagados do database)
     //public void excluir(@PathVariable Long id){
         //repository.deleteById(id);
+
+    @GetMapping("/{id}")
+    public ResponseEntity detalhar(@PathVariable Long id){
+        Medico medico = repository.getReferenceById(id);
+
+
+        return ResponseEntity.ok(new DadosDetalhamentoMedico(medico));
+    }
+
+    
 }
