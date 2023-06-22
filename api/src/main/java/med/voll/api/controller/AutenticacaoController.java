@@ -1,7 +1,9 @@
 package med.voll.api.controller;
 
 import jakarta.validation.Valid;
+import med.voll.api.infra.security.TokenService;
 import med.voll.api.usuario.DadosAutenticacao;
+import med.voll.api.usuario.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -19,6 +21,9 @@ public class AutenticacaoController {
     @Autowired
     private AuthenticationManager manager;
 
+    @Autowired
+    private TokenService tokenService;
+
     @PostMapping
     public ResponseEntity efetuarLogin(@RequestBody @Valid DadosAutenticacao dados){
 
@@ -28,6 +33,6 @@ public class AutenticacaoController {
         //Esse DTO do Spring irá ser recebido pelo manager que irá gerar um objeto Authentication
         Authentication authentication = manager.authenticate(token);
 
-        return ResponseEntity.ok().build();
+        return ResponseEntity.ok(tokenService.GerarToken((Usuario)authentication.getPrincipal()));
     }
 }
