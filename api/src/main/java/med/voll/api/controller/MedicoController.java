@@ -26,7 +26,7 @@ public class MedicoController {
     public ResponseEntity cadastrar(@RequestBody @Valid CadastroMedico dados, UriComponentsBuilder uriBuilder){
         Medico medico = new Medico(dados);
         repository.save(medico) ;//Transforma o DTO em Repository
-        URI uri = uriBuilder.path("/medicos/{id}").buildAndExpand(medico.getId()).toUri(); // Gera caminho uri
+        URI uri = uriBuilder.path("/medicos/{id}").buildAndExpand(medico.getId()).toUri(); // Gera caminho uri que é um padrão para retorno de cadastros
 
         return ResponseEntity.created(uri).body(new DadosDetalhamentoMedico(medico)); //Retorna código 201 e retorna DTO de detalhes da criação
     }
@@ -61,7 +61,6 @@ public class MedicoController {
     @GetMapping("/{id}")
     public ResponseEntity detalhar(@PathVariable Long id){
         Medico medico = repository.getReferenceById(id);
-
 
         return ResponseEntity.ok(new DadosDetalhamentoMedico(medico));
     }

@@ -22,8 +22,9 @@ public class TratadorDeErros {
     }
     @ExceptionHandler(MethodArgumentNotValidException.class)
     public ResponseEntity trataErro400(MethodArgumentNotValidException ex){
-        List<FieldError> erros = ex.getFieldErrors();
-        return ResponseEntity.badRequest().body(erros.stream().map(DtoErro::new).toList());
+        List<FieldError> erros = ex.getFieldErrors(); //Esse método retorna um objeto complexo de error pro body sendo assim é necessário devolver um DTO mais simplificado ao cliente
+        return ResponseEntity.badRequest().body(erros.stream().map(DtoErro::new).toList()); //Para isso foi criado um DTO que irá pegar o nome do campo e branco e a menssagem de erro
+        //Dto criado está no DtoErro.java
     }
 
 
