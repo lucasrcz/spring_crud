@@ -13,10 +13,12 @@ import java.time.ZoneOffset;
 @Service
 public class TokenService {
 
+    private String secret;
+
     public String GerarToken(Usuario usuario){
         try {
-            Algorithm algoritimo = Algorithm.HMAC256("12345678");
-            return   git JWT.create()
+            Algorithm algoritimo = Algorithm.HMAC256(secret);
+            return   JWT.create()
                     .withIssuer("API Voll.med")
                     .withSubject(usuario.getLogin())
                     .withExpiresAt(dataExpiracao())

@@ -1,6 +1,7 @@
 package med.voll.api.controller;
 
 import jakarta.validation.Valid;
+import med.voll.api.infra.DadosTokenJWT;
 import med.voll.api.infra.security.TokenService;
 import med.voll.api.usuario.DadosAutenticacao;
 import med.voll.api.usuario.Usuario;
@@ -32,7 +33,7 @@ public class AutenticacaoController {
         UsernamePasswordAuthenticationToken token = new UsernamePasswordAuthenticationToken(dados.getLogin(), dados.getSenha());
         //Esse DTO do Spring irá ser recebido pelo manager que irá gerar um objeto Authentication
         Authentication authentication = manager.authenticate(token);
-
-        return ResponseEntity.ok(tokenService.GerarToken((Usuario)authentication.getPrincipal()));
+        String tokenJWT = tokenService.GerarToken((Usuario)authentication.getPrincipal());
+        return ResponseEntity.ok(new DadosTokenJWT(tokenJWT));
     }
 }
